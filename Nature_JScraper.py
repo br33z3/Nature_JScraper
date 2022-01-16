@@ -164,13 +164,13 @@ def LinkFinder():
 	os.system(command3)
 	os.system(command4)
 	print("[***]Search Done Results Saved to results.html")
-	cdm="mv results.html "+project_name+"_jsfiles/"
+	cdm="mv results.html "+project_name+"_results.html"
 	os.system(cdm)
 	command3_2= "python3 SecretFinder.py -i '"+project_name+"_jsfiles/*' -o results2.html"
 	os.system(command3_2)
-	cdm="mv results2.html "+project_name+"_jsfiles/"
+	cdm="mv results2.html "+project_name+"_results2.html"
 	os.system(cdm)
-	cdm="mv results.txt "+project_name+"_jsfiles/"
+	cdm="mv results.txt "+project_name+"_results.txt"
 	os.system(cdm)
 	dime = datetime.datetime.now()
 	tempp= dime.strftime("%x %X")
