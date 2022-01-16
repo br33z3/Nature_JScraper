@@ -39,7 +39,7 @@ def notify( msg ):
 # -----------------------waybackurls---------------------------
 def waybackurls():
 
-	command = "cat "+target_file+" |"+"waybackurls -no-subs"
+	command = "cat "+target_file+" |"+"waybackurls"
 	p1 = subprocess.Popen(command,shell=True,stdout=subprocess.PIPE)
 	output = p1.stdout.read()
 	cangil ="waybackurls_out.txt"
@@ -149,11 +149,11 @@ def getJS():
 def LinkFinder():
 
 	print("\n[***]Searching For Interesting and Juicy Endpoints,api-keys inside all JavaScript Files")
-	command31 = "rm "+project_name+"_jsfiles/*.png"
-	command32 = "rm "+project_name+"_jsfiles/*.gif"
-	command33 = "rm "+project_name+"_jsfiles/*.jpg"
-	command34 = "rm "+project_name+"_jsfiles/*.jsp*"
-	command35 = "rm "+project_name+"_jsfiles/*.css"
+	command31 = "rm "+project_name+"_jsfiles/*.png 2>/dev/null"
+	command32 = "rm "+project_name+"_jsfiles/*.gif 2>/dev/null"
+	command33 = "rm "+project_name+"_jsfiles/*.jpg 2>/dev/null"
+	command34 = "rm "+project_name+"_jsfiles/*.jsp* 2>/dev/null"
+	command35 = "rm "+project_name+"_jsfiles/*.css 2>/dev/null"
 	os.system(command31)
 	os.system(command32)
 	os.system(command33)
