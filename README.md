@@ -6,6 +6,15 @@ Endpoints from All That Files. Also Sends a Notification Message when the Script
 ```
 python3 Nature_JScraper host.list <project_name_for_save>
 ```
+## Result Save Format
+```<project_name>_result.txt```
+```<project_name>_results.html```
+```<project_name>_results2.html```
+
+<br/>
+
+## Quick Introduction
+
 [![asciicast](https://asciinema.org/a/462166.svg)](https://asciinema.org/a/462166)
 
 
