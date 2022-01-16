@@ -1,7 +1,7 @@
 import os
 
 
-os.system("git clone https://github.com/GerbenJavado/LinkFinder.git")
+os.system("git clone https://github.com/br33z3/Nature_JScraper/tree/main/LinkFinder")
 os.system("cp LinkFinder/README.md .")
 os.system("python3 LinkFinder/setup.py install")
 os.system("pip3 install -r  LinkFinder/requirements.txt")
