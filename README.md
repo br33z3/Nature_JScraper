@@ -7,3 +7,5 @@ Endpoints from All That Files. Also Sends a Notification Message when the Script
 git clone https://github.com/br33z3/Nature_JScraper
 python3 install.py
 ```
+
+[![asciicast](https://asciinema.org/a/462166.svg)](https://asciinema.org/a/462166)
