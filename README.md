@@ -19,7 +19,13 @@ python3 Nature_JScraper host.list <project_name_for_save>
 
 [![asciicast](https://asciinema.org/a/462166.svg)](https://asciinema.org/a/462166)
 
+## Tools Inside
 
++ GetJS
++ Waybackurls
++ Gospider
++ Linkfinder
++ SecretFinder
 
 ## Install
 **!!Make Sure Install Go Before Install Tool!!**
