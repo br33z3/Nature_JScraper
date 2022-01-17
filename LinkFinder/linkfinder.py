@@ -256,13 +256,13 @@ def html_save(html):
 
         print("URL to access output: file://%s" % os.path.abspath(args.output))
         file = "file:///%s" % os.path.abspath(args.output)
-        if sys.platform == 'linux' or sys.platform == 'linux2':
-            subprocess.call(["xdg-open", file])
-        else:
-            webbrowser.open(file)
-    except Exception as e:
-        print("Output can't be saved in %s \
-            due to exception: %s" % (args.output, e))
+        #if sys.platform == 'linux' or sys.platform == 'linux2':
+        #    subprocess.call(["xdg-open", file])
+        #else:
+        #    webbrowser.open(file)
+    #except Exception as e:
+        #print("Output can't be saved in %s \
+        #    due to exception: %s" % (args.output, e))
     finally:
         os.dup2(hide, 1)
 
