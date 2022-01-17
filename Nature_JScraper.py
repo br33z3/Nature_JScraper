@@ -120,17 +120,30 @@ def getJS():
 		i = 0
 		command2 = "getJS --url "+getJS_list[x]+" --complete"
 		p2 = subprocess.Popen(command2,shell=True,stdout=subprocess.PIPE)
+		command3 = "echo "+getJS_list[x]+"|hakrawler|grep '\.js'"
 		output = p2.stdout.read()
 		output = output.decode().strip() # Find all JavaScript Files
 		lima = list(output.split("\n"))  # From raw input to list
-		kars=len(lima)
+		p3 = subprocess.Popen(command3,shell=True,stdout=subprocess.PIPE)
+		output2 = p3.stdout.read()
+		output2 = output2.decode().strip() # Find all JavaScript Files
+		lima2 = list(output2.split("\n"))  # From raw input to list
+		command5 = "gospider -S host.list -c 10 -d 1 -t 20 --sitemap --robots|grep -Eo \"(http|https)://[a-zA-Z0-9./?=_%:-]*\"|grep '\.js'|sort -u"
+		p4 = subprocess.Popen(command5,shell=True,stdout=subprocess.PIPE)
+		output3 = p4.stdout.read()
+		output3 = output3.decode().strip() # Find all JavaScript Files
+		lima4 = list(output3.split("\n"))  # From raw input to list
+		lima3 = lima + lima2 + lima4
+		kars=len(lima3)
+		print(kars)
 		if kars > 1:
-			for m in range(len(lima)):
-				print(lima[m])
-			for i in range(len(lima)):
-				here=lima[i].split("//")
+			for m in range(len(lima3)):
+				print(lima3[m])
+			for i in range(int(len(lima3)-1)):
+				here=lima3[i].split("//")
+				print(here)
 				last_but_not_least=here[1].replace('/', '\\')
-				command = "wget "+"\""+lima[i]+"\""+" -O "+pwd+"/"+project_name+"_jsfiles/"+"\""+last_but_not_least+"\""+" -q --no-check-certificate --timeout=15 --tries=2"
+				command = "wget "+"\""+lima3[i]+"\""+" -O "+pwd+"/"+project_name+"_jsfiles/"+"\""+last_but_not_least+"\""+" -q --no-check-certificate --timeout=15 --tries=2"
 				os.system(command)
 		else:
 			print("no data")
