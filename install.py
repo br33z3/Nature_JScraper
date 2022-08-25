@@ -1,7 +1,8 @@
 import os
 
+os.system("apt-get update && apt-get install golang -y")
 os.system("python3 LinkFinder/setup.py install")
-os.system("pip3 install -r  LinkFinder/requirements.txt")
+os.system("pip3 install -r jsbeautifier")
 os.system("pip3 install pyfiglet argparse html==1.7")
 os.system("rm -rf build/ README.md dist/ LinkFinder.egg-info/")
 os.system("mv LinkFinder/linkfinder.py LinkFinder/template.html .")
