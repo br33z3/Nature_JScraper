@@ -36,7 +36,7 @@ def notify( msg ):
 def send_file ( ): #Change Document Location: @/opt/Na...
 	# https://core.telegram.org/bots/api#senddocument
 	pwd = os.getcwd()
-	token  = "CHANGEME"
+	token  = "CHANGEME" #If you want to get Telegram Bot notification make sure delete comment phrase in send_file function down below.
 	chatid = "CHANGEME"
 	command1 = "curl -F chat_id="+chatid+" -F document=@"+pwd+"/"+project_name+"_jsfiles/results.txt"+" \"https://api.telegram.org/bot"+token+"/sendDocument\" 2>/dev/null"
 	command2 = "curl -F chat_id="+chatid+" -F document=@"+pwd+"/"+project_name+"_jsfiles/results.html"+" \"https://api.telegram.org/bot"+token+"/sendDocument\" 2>/dev/null"
