@@ -26,20 +26,30 @@ def banner():
 def notify( msg ):
 
 	# https://medium.com/@ManHay_Hong/how-to-create-a-telegram-bot-and-send-messages-with-python-4cf314d9fa3e
-	token  = ""
-	chatid = ""
+	token  = <ENTER TOKEN>   # "10........71:AA...7b--FbFw...........6YX9Z4"
+	chatid = <ENTER CHATID>  # "-444...3432"
 	command = "curl -s -X POST"+" \"https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chatid+"&text="+msg+"\""
 	p4 = subprocess.Popen(command,shell=True,stdout=subprocess.PIPE)
 
 # -----------------------notify--------------------------------
 # -------------------------------------------------------------
 
+def send_file ( ): #Change Document Location: @/opt/Na...
+	# https://core.telegram.org/bots/api#senddocument
+	token  = <ENTER TOKEN>   # "10........71:AA...7b--FbFw...........6YX9Z4"
+	chatid = <ENTER CHATID>  # "-444...3432"
+	command1 = "curl -F chat_id="+chatid+" -F document=@/opt/Nature_JScraper/"+project_name+"_jsfiles/results.txt"+" \"https://api.telegram.org/bot"+token+"/sendDocument\" 2>/dev/null"
+	command2 = "curl -F chat_id="+chatid+" -F document=@/opt/Nature_JScraper/"+project_name+"_jsfiles/results.html"+" \"https://api.telegram.org/bot"+token+"/sendDocument\" 2>/dev/null"
+	command3 = "curl -F chat_id="+chatid+" -F document=@/opt/Nature_JScraper/"+project_name+"_jsfiles/results2.html"+" \"https://api.telegram.org/bot"+token+"/sendDocument\" 2>/dev/null"
+	os.system(command1)
+	os.system(command2)
+	os.system(command3)
 
 # -------------------------------------------------------------
 # -----------------------waybackurls---------------------------
 def waybackurls():
 
-	command = "cat "+target_file+" |"+"waybackurls"
+	command = "cat "+target_file+" |"+"waybackurls "
 	p1 = subprocess.Popen(command,shell=True,stdout=subprocess.PIPE)
 	output = p1.stdout.read()
 	cangil ="waybackurls_out.txt"
@@ -90,7 +100,7 @@ def download_files( files ):
 	for i in range(length):
 		here2=files[i].split("//")
 		last_but_not_least2=here2[1].replace('/', '\\')
-		command = "wget "+"\""+files[i]+"\""+" -O "+pwd+"/"+project_name+"_jsfiles/"+"\""+last_but_not_least2+"\""+" -q --no-check-certificate --timeout=10 --tries=2"
+		command = "wget "+"\""+files[i]+"\""+" -O "+pwd+"/"+project_name+"_jsfiles/"+"\""+last_but_not_least2+"\""+" -q --no-check-certificate --timeout=10 --tries=2 2>/dev/null"
 		os.system(command)
 	print("[+] All WayBackUrls JavaScript Files Downloaded Successfully")
 
@@ -120,30 +130,17 @@ def getJS():
 		i = 0
 		command2 = "getJS --url "+getJS_list[x]+" --complete"
 		p2 = subprocess.Popen(command2,shell=True,stdout=subprocess.PIPE)
-		command3 = "echo "+getJS_list[x]+"|hakrawler|grep '\.js'"
 		output = p2.stdout.read()
 		output = output.decode().strip() # Find all JavaScript Files
 		lima = list(output.split("\n"))  # From raw input to list
-		p3 = subprocess.Popen(command3,shell=True,stdout=subprocess.PIPE)
-		output2 = p3.stdout.read()
-		output2 = output2.decode().strip() # Find all JavaScript Files
-		lima2 = list(output2.split("\n"))  # From raw input to list
-		command5 = "gospider -S host.list -c 10 -d 1 -t 20 --sitemap --robots|grep -Eo \"(http|https)://[a-zA-Z0-9./?=_%:-]*\"|grep '\.js'|sort -u"
-		p4 = subprocess.Popen(command5,shell=True,stdout=subprocess.PIPE)
-		output3 = p4.stdout.read()
-		output3 = output3.decode().strip() # Find all JavaScript Files
-		lima4 = list(output3.split("\n"))  # From raw input to list
-		lima3 = lima + lima2 + lima4
-		kars=len(lima3)
-		print(kars)
+		kars=len(lima)
 		if kars > 1:
-			for m in range(len(lima3)):
-				print(lima3[m])
-			for i in range(int(len(lima3)-1)):
-				here=lima3[i].split("//")
-				print(here)
+			for m in range(len(lima)):
+				print(lima[m])
+			for i in range(len(lima)):
+				here=lima[i].split("//")
 				last_but_not_least=here[1].replace('/', '\\')
-				command = "wget "+"\""+lima3[i]+"\""+" -O "+pwd+"/"+project_name+"_jsfiles/"+"\""+last_but_not_least+"\""+" -q --no-check-certificate --timeout=15 --tries=2"
+				command = "wget "+"\""+lima[i]+"\""+" -O "+pwd+"/"+project_name+"_jsfiles/"+"\""+last_but_not_least+"\""+" -q --no-check-certificate --timeout=15 --tries=2"
 				os.system(command)
 		else:
 			print("no data")
@@ -162,28 +159,28 @@ def getJS():
 def LinkFinder():
 
 	print("\n[***]Searching For Interesting and Juicy Endpoints,api-keys inside all JavaScript Files")
-	command31 = "rm "+project_name+"_jsfiles/*.png 2>/dev/null"
-	command32 = "rm "+project_name+"_jsfiles/*.gif 2>/dev/null"
-	command33 = "rm "+project_name+"_jsfiles/*.jpg 2>/dev/null"
+	command31 = "rm "+project_name+"_jsfiles/*.png  2>/dev/null"
+	command32 = "rm "+project_name+"_jsfiles/*.gif  2>/dev/null"
+	command33 = "rm "+project_name+"_jsfiles/*.jpg  2>/dev/null"
 	command34 = "rm "+project_name+"_jsfiles/*.jsp* 2>/dev/null"
-	command35 = "rm "+project_name+"_jsfiles/*.css 2>/dev/null"
+	command35 = "rm "+project_name+"_jsfiles/*.css  2>/dev/null"
 	os.system(command31)
 	os.system(command32)
 	os.system(command33)
 	os.system(command34)
 	os.system(command35)
-	command3 = "python3 linkfinder.py -i '"+project_name+"_jsfiles/*.js*'"+" -o results.html"
-	command4 = "python3 linkfinder.py -i '"+project_name+"_jsfiles/*.js*'"+" -o cli > results.txt"
+	command3 = "python3 linkfinder.py -i '"+project_name+"_jsfiles/*.js*'"+" -o results.html 2>/dev/null"
+	command4 = "python3 linkfinder.py -i '"+project_name+"_jsfiles/*.js*'"+" -o cli > results.txt 2>/dev/null"
 	os.system(command3)
 	os.system(command4)
 	print("[***]Search Done Results Saved to results.html")
-	cdm="mv results.html "+project_name+"_results.html"
+	cdm="mv results.html "+project_name+"_jsfiles/ 2>/dev/null"
 	os.system(cdm)
-	command3_2= "python3 SecretFinder.py -i '"+project_name+"_jsfiles/*' -o results2.html"
+	command3_2= "python3 SecretFinder.py -i '"+project_name+"_jsfiles/*' -o results2.html 2>/dev/null"
 	os.system(command3_2)
-	cdm="mv results2.html "+project_name+"_results2.html"
+	cdm="mv results2.html "+project_name+"_jsfiles/ 2>/dev/null"
 	os.system(cdm)
-	cdm="mv results.txt "+project_name+"_results.txt"
+	cdm="mv results.txt "+project_name+"_jsfiles/ 2>/dev/null"
 	os.system(cdm)
 	dime = datetime.datetime.now()
 	tempp= dime.strftime("%x %X")
@@ -192,6 +189,7 @@ def LinkFinder():
 
 # -----------------------LinkFinder---------------------------------
 # ------------------------------------------------------------------
+
 
 
 
@@ -209,3 +207,4 @@ if __name__ == "__main__":
 	download_files(js_files)
 	getJS()
 	LinkFinder()
+	send_file()
