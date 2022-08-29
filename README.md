@@ -1,3 +1,6 @@
+## Support me
+<a href="https://www.buymeacoffee.com/br33z3" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
 # Nature_JScraper
 Finding All JavaScript Files From WayBackUrls To Current Date and Scraping Juicy Files, APIs,
 Endpoints from All That Files. </br>
