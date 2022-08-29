@@ -207,4 +207,4 @@ if __name__ == "__main__":
 	download_files(js_files)
 	getJS()
 	LinkFinder()
-	send_file()
+	#send_file()
