@@ -4,6 +4,7 @@ import re
 import os
 import pyfiglet
 import datetime
+#from pathlib import Path
 
 
 target_file = sys.argv[1] #Getting Subdomains
@@ -14,10 +15,8 @@ def banner():
 
 	out = pyfiglet.figlet_format("Nature_JScraper")
 	print(out)
-	print("                                                                 v0.01")
+	print("                                                                 v1.0")
 	print("                                                                 by br33z3")
-
-
 
 	print("Usage: python3 Nature_JScraper.py <file name include domains> <project name>")
 # -------------------------------------------------------------
@@ -26,21 +25,23 @@ def banner():
 def notify( msg ):
 
 	# https://medium.com/@ManHay_Hong/how-to-create-a-telegram-bot-and-send-messages-with-python-4cf314d9fa3e
-	token  = <ENTER TOKEN>   # "10........71:AA...7b--FbFw...........6YX9Z4"
-	chatid = <ENTER CHATID>  # "-444...3432"
+	token  = "CHANGEME" #If you want to get Telegram Bot notification make sure delete comment phrase in notify functions down below.
+	chatid = "CHANGEME"
 	command = "curl -s -X POST"+" \"https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chatid+"&text="+msg+"\""
-	p4 = subprocess.Popen(command,shell=True,stdout=subprocess.PIPE)
+	os.system(command)
 
 # -----------------------notify--------------------------------
 # -------------------------------------------------------------
 
 def send_file ( ): #Change Document Location: @/opt/Na...
 	# https://core.telegram.org/bots/api#senddocument
-	token  = <ENTER TOKEN>   # "10........71:AA...7b--FbFw...........6YX9Z4"
-	chatid = <ENTER CHATID>  # "-444...3432"
-	command1 = "curl -F chat_id="+chatid+" -F document=@/opt/Nature_JScraper/"+project_name+"_jsfiles/results.txt"+" \"https://api.telegram.org/bot"+token+"/sendDocument\" 2>/dev/null"
-	command2 = "curl -F chat_id="+chatid+" -F document=@/opt/Nature_JScraper/"+project_name+"_jsfiles/results.html"+" \"https://api.telegram.org/bot"+token+"/sendDocument\" 2>/dev/null"
-	command3 = "curl -F chat_id="+chatid+" -F document=@/opt/Nature_JScraper/"+project_name+"_jsfiles/results2.html"+" \"https://api.telegram.org/bot"+token+"/sendDocument\" 2>/dev/null"
+	pwd = os.getcwd()
+	token  = "CHANGEME"
+	chatid = "CHANGEME"
+	command1 = "curl -F chat_id="+chatid+" -F document=@"+pwd+"/"+project_name+"_jsfiles/results.txt"+" \"https://api.telegram.org/bot"+token+"/sendDocument\" 2>/dev/null"
+	command2 = "curl -F chat_id="+chatid+" -F document=@"+pwd+"/"+project_name+"_jsfiles/results.html"+" \"https://api.telegram.org/bot"+token+"/sendDocument\" 2>/dev/null"
+	command3 = "curl -F chat_id="+chatid+" -F document=@"+pwd+"/"+project_name+"_jsfiles/results2.html"+" \"https://api.telegram.org/bot"+token+"/sendDocument\" 2>/dev/null"
+
 	os.system(command1)
 	os.system(command2)
 	os.system(command3)
@@ -49,7 +50,7 @@ def send_file ( ): #Change Document Location: @/opt/Na...
 # -----------------------waybackurls---------------------------
 def waybackurls():
 
-	command = "cat "+target_file+" |"+"waybackurls "
+	command = "cat "+target_file+" |"+"waybackurls -no-subs"
 	p1 = subprocess.Popen(command,shell=True,stdout=subprocess.PIPE)
 	output = p1.stdout.read()
 	cangil ="waybackurls_out.txt"
@@ -171,6 +172,8 @@ def LinkFinder():
 	os.system(command35)
 	command3 = "python3 linkfinder.py -i '"+project_name+"_jsfiles/*.js*'"+" -o results.html 2>/dev/null"
 	command4 = "python3 linkfinder.py -i '"+project_name+"_jsfiles/*.js*'"+" -o cli > results.txt 2>/dev/null"
+	print(command3)
+	print(command4)
 	os.system(command3)
 	os.system(command4)
 	print("[***]Search Done Results Saved to results.html")
@@ -189,9 +192,6 @@ def LinkFinder():
 
 # -----------------------LinkFinder---------------------------------
 # ------------------------------------------------------------------
-
-
-
 
 if __name__ == "__main__":
 
